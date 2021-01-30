@@ -74,10 +74,18 @@ function App() {
     // );
   };
 
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
+  const addTask = async (task) => {
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    });
 
-    setTasks([...tasks, { ...task, id: id }]);
+    // const id = Math.floor(Math.random() * 10000) + 1;
+
+    // setTasks([...tasks, { ...task, id: id }]);
   };
 
   const toggleAddTask = () => {
