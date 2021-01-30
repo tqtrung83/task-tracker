@@ -20,6 +20,8 @@ function App() {
     },
   ]);
 
+  const [showAddTask, setShowAddTask] = useState(false);
+
   //Delete task
   const deleteTask = (id) => {
     const newListTasks = tasks.filter((task) => task.id !== id);
@@ -48,12 +50,16 @@ function App() {
     setTasks([...tasks, { ...task, id: id }]);
   };
 
+  const toggleAddTask = () => {
+    setShowAddTask((prev) => !prev);
+  };
+
   return (
     <>
       <div className='container'>
-        <Header />
+        <Header toggleAddTask={toggleAddTask} showAddTask={showAddTask} />
 
-        <AddTask onAdd={addTask} />
+        {showAddTask && <AddTask onAdd={addTask} />}
         {tasks.length > 0 ? (
           <Tasks
             tasks={tasks}
