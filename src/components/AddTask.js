@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 
-const AddTask = () => {
+const AddTask = ({ onAdd }) => {
   const [text, setText] = useState('');
   const [day, setDay] = useState('');
   const [reminder, setReminder] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!text) {
+      alert('Please add text');
+      return;
+    }
+    if (!day) {
+      alert('Please add day');
+      return;
+    }
+
+    onAdd({ text, day, reminder });
+
+    // Reset state
+    setText('');
+    setDay('');
+    setReminder(false);
   };
 
   return (

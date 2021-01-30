@@ -43,7 +43,9 @@ function App() {
   };
 
   const addTask = (task) => {
-    setTasks([...tasks, task]);
+    const id = Math.floor(Math.random() * 10000) + 1;
+
+    setTasks([...tasks, { ...task, id: id }]);
   };
 
   return (
@@ -51,7 +53,7 @@ function App() {
       <div className='container'>
         <Header />
 
-        <AddTask />
+        <AddTask onAdd={addTask} />
         {tasks.length > 0 ? (
           <Tasks
             tasks={tasks}
