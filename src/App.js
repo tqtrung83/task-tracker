@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import { FaTrashAlt } from 'react-icons/fa';
+import AddTask from './components/AddTask';
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -41,10 +42,16 @@ function App() {
     );
   };
 
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+
   return (
     <>
       <div className='container'>
         <Header />
+
+        <AddTask />
         {tasks.length > 0 ? (
           <Tasks
             tasks={tasks}
