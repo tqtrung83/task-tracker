@@ -9,21 +9,28 @@ function App() {
   const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
-    fetchTasks();
-  }, tasks);
+    const getTasks = async () => {
+      const taskFromServer = await fetchTasks();
+      setTasks(taskFromServer);
+    };
+    getTasks();
+  }, [tasks]);
 
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();
 
-    setTasks(data);
+    return data;
   };
 
   //Delete task
-  const deleteTask = (id) => {
-    const newListTasks = tasks.filter((task) => task.id !== id);
+  const deleteTask = async (id) => {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'Delete',
+    });
 
-    setTasks(newListTasks);
+    // const newListTasks = tasks.filter((task) => task.id !== id);
+    // setTasks(newListTasks);
   };
 
   //Toggle reminder
