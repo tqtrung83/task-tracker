@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Tasks from './components/Tasks';
 import { FaTrashAlt } from 'react-icons/fa';
 import AddTask from './components/AddTask';
+import Footer from './components/Footer';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -14,7 +15,7 @@ function App() {
       setTasks(taskFromServer);
     };
     getTasks();
-  }, [tasks]);
+  }, []);
 
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks');
@@ -36,8 +37,8 @@ function App() {
       method: 'Delete',
     });
 
-    // const newListTasks = tasks.filter((task) => task.id !== id);
-    // setTasks(newListTasks);
+    const newListTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newListTasks);
   };
 
   //Toggle reminder
@@ -56,12 +57,12 @@ function App() {
       body: JSON.stringify(updatedTask),
     });
 
-    // const data = await res.json();
-    // setTasks(
-    //   tasks.map((task) =>
-    //     task.id === id ? { ...task, reminder: data.reminder } : task
-    //   )
-    // );
+    const data = await res.json();
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: data.reminder } : task
+      )
+    );
 
     // setTasks(
     //   tasks.map((task) =>
@@ -82,6 +83,10 @@ function App() {
       },
       body: JSON.stringify(task),
     });
+
+    const newTask = await res.json();
+
+    setTasks([...tasks, newTask]);
 
     // const id = Math.floor(Math.random() * 10000) + 1;
 
@@ -108,6 +113,7 @@ function App() {
           'No Tasks to show'
         )}
       </div>
+      <Footer />
     </>
   );
 }
