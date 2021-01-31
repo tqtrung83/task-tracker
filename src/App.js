@@ -4,6 +4,7 @@ import Tasks from './components/Tasks';
 import { FaTrashAlt } from 'react-icons/fa';
 import AddTask from './components/AddTask';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -99,6 +100,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <div className='container'>
         <Header toggleAddTask={toggleAddTask} showAddTask={showAddTask} />
 
