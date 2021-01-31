@@ -31,8 +31,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
-### Run the JSON server (http://localhost:5000)
-npm run server
+# Run the JSON server (http://localhost:5000)
+### `npm run server`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
